@@ -3,18 +3,18 @@ using System;
 using Microsoft.AspNet.Authentication.OpenIdConnect;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Diagnostics;
+using Microsoft.AspNet.Cors.Core;
 using Microsoft.AspNet.Diagnostics.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
+using Microsoft.Dnx.Runtime;
 using Microsoft.Framework.Caching.Memory;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
-using Microsoft.Dnx.Runtime;
+using MusicStore.Components;
 using MusicStore.Mocks.Common;
 using MusicStore.Mocks.OpenIdConnect;
-using MusicStore.Components;
 using MusicStore.Models;
 
 namespace MusicStore
@@ -87,7 +87,7 @@ namespace MusicStore
                 };
             });
 
-            services.ConfigureCors(options =>
+            services.Configure<CorsOptions>(options =>
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 {

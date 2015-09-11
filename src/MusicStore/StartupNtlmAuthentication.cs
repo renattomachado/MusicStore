@@ -2,15 +2,15 @@ using System;
 using System.Security.Claims;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Diagnostics;
+using Microsoft.AspNet.Cors.Core;
 using Microsoft.AspNet.Diagnostics.Entity;
 using Microsoft.AspNet.Http.Features;
 using Microsoft.Data.Entity;
+using Microsoft.Dnx.Runtime;
 using Microsoft.Framework.Caching.Memory;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
-using Microsoft.Dnx.Runtime;
 using Microsoft.Net.Http.Server;
 using MusicStore.Components;
 using MusicStore.Models;
@@ -54,7 +54,7 @@ namespace MusicStore
                     .AddDbContext<MusicStoreContext>(options =>
                             options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
 
-            services.ConfigureCors(options =>
+            services.Configure<CorsOptions>(options =>
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 {

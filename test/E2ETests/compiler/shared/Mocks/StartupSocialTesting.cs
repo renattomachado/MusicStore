@@ -4,15 +4,16 @@ using Microsoft.AspNet.Authentication.OAuth;
 using Microsoft.AspNet.Authentication.Twitter;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Cors.Core;
 using Microsoft.AspNet.Diagnostics.Entity;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
+using Microsoft.Dnx.Runtime;
 using Microsoft.Framework.Caching.Memory;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
-using Microsoft.Dnx.Runtime;
 using MusicStore.Components;
 using MusicStore.Mocks.Common;
 using MusicStore.Mocks.Facebook;
@@ -29,7 +30,7 @@ namespace MusicStore
 
         public StartupSocialTesting(IApplicationEnvironment appEnvironment, IRuntimeEnvironment runtimeEnvironment)
         {
-            //Below code demonstrates usage of multiple configuration sources. For instance a setting say 'setting1' is found in both the registered sources, 
+            //Below code demonstrates usage of multiple configuration sources. For instance a setting say 'setting1' is found in both the registered sources,
             //then the later source will win. By this way a Local config can be overridden by a different setting while deployed remotely.
             var builder = new ConfigurationBuilder(appEnvironment.ApplicationBasePath)
                         .AddJsonFile("config.json")
@@ -138,7 +139,7 @@ namespace MusicStore
                 options.Scope.Add("wl.signin");
             });
 
-            services.ConfigureCors(options =>
+            services.Configure<CorsOptions>(options =>
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 {
