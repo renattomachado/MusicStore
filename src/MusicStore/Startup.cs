@@ -13,7 +13,6 @@ using Microsoft.Framework.Logging;
 using Microsoft.Dnx.Runtime;
 using MusicStore.Components;
 using MusicStore.Models;
-using Microsoft.AspNet.Cors.Core;
 
 namespace MusicStore
 {
@@ -90,7 +89,7 @@ namespace MusicStore
                 options.ClientSecret = "GaMQ2hCnqAC6EcDLnXsAeBVIJOLmeutL";
             });
 
-            services.Configure<CorsOptions>(options =>
+            services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 {

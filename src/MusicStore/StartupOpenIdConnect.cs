@@ -1,14 +1,15 @@
+using System;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Cors.Core;
+using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Diagnostics.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
-using Microsoft.Dnx.Runtime;
 using Microsoft.Framework.Caching.Memory;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
+using Microsoft.Dnx.Runtime;
 using MusicStore.Components;
 using MusicStore.Models;
 
@@ -78,7 +79,7 @@ namespace MusicStore
                 options.ClientId = "[ClientId]";
             });
 
-            services.Configure<CorsOptions>(options =>
+            services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 {
